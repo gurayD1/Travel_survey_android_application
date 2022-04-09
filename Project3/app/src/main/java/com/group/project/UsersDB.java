@@ -34,10 +34,10 @@ public class UsersDB {
         }
     }
 
-    public static Boolean checkUserExists(String email) {
+    public static Boolean checkUserExists(String username) {
 
         for (UserModel usr : UsersDB.getInstance().myUsers) {
-            if (usr.getEmail().equals(email)) {
+            if (usr.getUserName().equals(username)) {
                 return true;
             }
         }
@@ -47,7 +47,7 @@ public class UsersDB {
     public static Boolean validateUser(UserModel u) {
 
         for (UserModel usr : UsersDB.getInstance().myUsers) {
-            if (usr.getEmail().equals(u.getEmail())) {
+            if (usr.getUserName().equals(u.getUserName())) {
 
                 if (usr.getPassword().equals(u.getPassword())) {
                     return true;

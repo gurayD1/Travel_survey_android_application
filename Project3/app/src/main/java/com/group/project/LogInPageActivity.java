@@ -18,11 +18,10 @@ import com.google.gson.Gson;
 public class LogInPageActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE  = 1;
     private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE  = 2;
-    EditText loginEmail;
+    EditText loginUserName;
     EditText loginPassword;
 
-    EditText sFullName;
-    EditText sEmail;
+    EditText sUserName;
     EditText sPassword;
     EditText sCPassword;
 
@@ -33,11 +32,10 @@ public class LogInPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_page);
 
-        loginEmail = (EditText) findViewById(R.id.loginEmail);
+        loginUserName = (EditText) findViewById(R.id.loginUserName);
         loginPassword = (EditText) findViewById(R.id.loginPassword);
 
-        sFullName = (EditText) findViewById(R.id.sFullName);
-        sEmail = (EditText) findViewById(R.id.sEmail);
+        sUserName = (EditText) findViewById(R.id.sUserName);
         sPassword = (EditText) findViewById(R.id.sPassword);
         sCPassword = (EditText) findViewById(R.id.sCPassword);
 
@@ -70,10 +68,10 @@ public class LogInPageActivity extends AppCompatActivity {
 
 
     public void logInClicked(View view) {
-        String uName = loginEmail.getText().toString();
+        String uName = loginUserName.getText().toString();
         String password = loginPassword.getText().toString();
         UserModel u = new UserModel();
-        u.setEmail(uName);
+        u.setUserName(uName);
         u.setPassword(password);
 
 
@@ -107,8 +105,7 @@ public class LogInPageActivity extends AppCompatActivity {
     }
 
     public void signUpClicked(View view) {
-        String uName = sEmail.getText().toString();
-        String fullName = sFullName.getText().toString();
+        String uName = sUserName.getText().toString();
         String password = sPassword.getText().toString();
         String cPassword = sCPassword.getText().toString();
         UsersDB usersDB = UsersDB.getInstance();
@@ -124,8 +121,7 @@ public class LogInPageActivity extends AppCompatActivity {
         // Otherwise check if the passwords match
         else if (password.equals(cPassword)) {
             UserModel user = new UserModel();
-            user.setEmail(uName);
-            user.setFullName(fullName);
+            user.setUserName(uName);
             user.setPassword(password);
 
             usersDB.addUser(user);
