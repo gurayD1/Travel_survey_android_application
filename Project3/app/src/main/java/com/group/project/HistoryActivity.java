@@ -75,9 +75,12 @@ public class HistoryActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         //cityName.setText(View.GONE);
                         //countryName.setText(View.GONE);
-                        cityName.setVisibility(View.GONE);
-                        countryName.setVisibility(View.GONE);
-                        deleteRow.setVisibility(View.GONE);
+
+
+                        //cityName.setText(String.valueOf(result1.setCityName()));
+                        cityName.setText(String.valueOf(result1.getCityName()));
+                        countryName.setText(String.valueOf(result1.getCountryName()));
+                        deleteRow.setText(String.valueOf(result1.getCityName()));
                     }
                 });
 
