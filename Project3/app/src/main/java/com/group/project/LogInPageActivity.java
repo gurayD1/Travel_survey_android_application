@@ -32,10 +32,10 @@ public class LogInPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_page);
 
-        loginUserName = (EditText) findViewById(R.id.loginUserName);
+        loginUserName = (EditText) findViewById(R.id.loginEmail);
         loginPassword = (EditText) findViewById(R.id.loginPassword);
 
-        sUserName = (EditText) findViewById(R.id.sUserName);
+        sUserName = (EditText) findViewById(R.id.sEmail);
         sPassword = (EditText) findViewById(R.id.sPassword);
         sCPassword = (EditText) findViewById(R.id.sCPassword);
 
