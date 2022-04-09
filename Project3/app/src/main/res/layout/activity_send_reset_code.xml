@@ -18,7 +18,7 @@
     android:layout_height="match_parent"
 
     android:background="#F8CB47"
-    tools:context=".ResultActivity">
+    tools:context=".SendResetActivity">
 
     <TextView
         android:id="@+id/textView1"
@@ -27,7 +27,7 @@
         android:layout_marginTop="40dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:text="Trouble Accesing Your Account?"
+        android:text="Trouble Accessing\nYour Account?"
         android:textColor="#000"
         android:textSize="36sp"
         android:textStyle="italic"
@@ -41,42 +41,40 @@
         android:id="@+id/buttonAccessClicked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/buttons"
-        android:onClick="AccessCodeClicked"
+        android:onClick="accessCodeClicked"
         android:text="Click If You Have\n An Access Code"
         android:textColor="#FFFFFF"
+        android:paddingHorizontal="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSubmit" />
 
     <android.widget.Button
         android:id="@+id/buttonSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/buttons"
-        android:onClick="SubmitClicked"
+        android:onClick="submitClicked"
         android:text="Submit"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
     <EditText
         android:id="@+id/textViewEmail"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
         android:layout_height="wrap_content"
         android:hint="Email"
-        android:minHeight="48dp"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView1" />
