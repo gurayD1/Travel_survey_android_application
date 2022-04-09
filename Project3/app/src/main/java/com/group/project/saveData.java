@@ -29,122 +29,169 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class saveData extends AppCompatActivity {
-    Gson gson = new Gson();
-    String text = "";
+//    Gson gson = new Gson();
+//    String text = "";
 
 
-    public String loadUsersFromFile() {
-        Gson gson = new Gson();
-        String text = "";
+    public UsersDB loadUsersFromFile_new(){
 
-//Make sure to use a try-catch statement to catch any errors
+        ObjectInput in;
+        UsersDB instance=null;
         try {
-            //Make your FilePath and File
-
-            File yourFile = new File(Environment.getExternalStorageDirectory(), "users.txt");
-
-            //Make an InputStream with your File in the constructor
-            InputStream inputStream = new FileInputStream(yourFile);
-            StringBuilder stringBuilder = new StringBuilder();
-            //Check to see if your inputStream is null
-            //If it isn't use the inputStream to make a InputStreamReader
-            //Use that to make a BufferedReader
-            //Also create an empty String
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                //Use a while loop to append the lines from the Buffered reader
-                while ((receiveString = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(receiveString);
-                }
-                //Close your InputStream and save stringBuilder as a String
-                inputStream.close();
-                text = stringBuilder.toString();
-            }
-        } catch (FileNotFoundException e) {
-            //Log your error with Log.e
-        } catch (IOException e) {
-            //Log your error with Log.e
-        }
-//Use Gson to recreate your Object from the text String
-        return text;
+            File file = new File(UsersDB.getFilePath(), "users.data");
+            in = new ObjectInputStream(new FileInputStream(file));
+            instance=(UsersDB) in.readObject();
+            in.close();
+        } catch (Exception e) {e.printStackTrace();}
+        return instance;
 
     }
-
-    public void saveUsersToFile(String data) {
+    public void saveUsersToFile_new(UsersDB instance ){
         ObjectOutput out;
         try {
-            File outFile = new File(Environment.getExternalStorageDirectory(), "users.txt");
-            FileOutputStream fileOutputStream = new FileOutputStream(outFile);
-
-            fileOutputStream.write(data.getBytes());
-            fileOutputStream.flush();
-            fileOutputStream.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+            File outFile = new File(UsersDB.getFilePath(), "users.data");
+            out = new ObjectOutputStream(new FileOutputStream(outFile));
+            out.writeObject(instance);
+            out.close();
+        } catch (Exception e) {e.printStackTrace();}
 
     }
-
-    public void saveResultsToFile(String data) {
-
+    public void saveResultsToFile_new(ResultsDB instance){
         ObjectOutput out;
         try {
-            File outFile = new File(Environment.getExternalStorageDirectory(), "results.txt");
-            FileOutputStream fileOutputStream = new FileOutputStream(outFile);
-
-            fileOutputStream.write(data.getBytes());
-            fileOutputStream.flush();
-            fileOutputStream.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            File outFile = new File(UsersDB.getFilePath(), "results.data");
+            out = new ObjectOutputStream(new FileOutputStream(outFile));
+            out.writeObject(instance);
+            out.close();
+        } catch (Exception e) {e.printStackTrace();}
 
     }
-
-    public String loadResultsFromFile() {
-
-        Gson gson = new Gson();
-        String text = "";
-
-//Make sure to use a try-catch statement to catch any errors
+    public ResultsDB loadResultsFromFile_new(){
+        ObjectInput in;
+        ResultsDB instance=null;
         try {
-            //Make your FilePath and File
-
-            File yourFile = new File(Environment.getExternalStorageDirectory(), "results.txt");
-
-            //Make an InputStream with your File in the constructor
-            InputStream inputStream = new FileInputStream(yourFile);
-            StringBuilder stringBuilder = new StringBuilder();
-            //Check to see if your inputStream is null
-            //If it isn't use the inputStream to make a InputStreamReader
-            //Use that to make a BufferedReader
-            //Also create an empty String
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                //Use a while loop to append the lines from the Buffered reader
-                while ((receiveString = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(receiveString);
-                }
-                //Close your InputStream and save stringBuilder as a String
-                inputStream.close();
-                text = stringBuilder.toString();
-            }
-        } catch (FileNotFoundException e) {
-            //Log your error with Log.e
-        } catch (IOException e) {
-            //Log your error with Log.e
-        }
-//Use Gson to recreate your Object from the text String
-        return text;
+            File file = new File(UsersDB.getFilePath(), "results.data");
+            in = new ObjectInputStream(new FileInputStream(file));
+            instance=(ResultsDB) in.readObject();
+            in.close();
+        } catch (Exception e) {e.printStackTrace();}
+        return instance;
 
     }
+
+
+//    public String loadUsersFromFile() {
+//        Gson gson = new Gson();
+//        String text = "";
+//
+////Make sure to use a try-catch statement to catch any errors
+//        try {
+//            //Make your FilePath and File
+//
+//            File yourFile = new File(Environment.getExternalStorageDirectory(), "users.txt");
+//
+//            //Make an InputStream with your File in the constructor
+//            InputStream inputStream = new FileInputStream(yourFile);
+//            StringBuilder stringBuilder = new StringBuilder();
+//            //Check to see if your inputStream is null
+//            //If it isn't use the inputStream to make a InputStreamReader
+//            //Use that to make a BufferedReader
+//            //Also create an empty String
+//            if (inputStream != null) {
+//                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+//                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//                String receiveString = "";
+//                //Use a while loop to append the lines from the Buffered reader
+//                while ((receiveString = bufferedReader.readLine()) != null) {
+//                    stringBuilder.append(receiveString);
+//                }
+//                //Close your InputStream and save stringBuilder as a String
+//                inputStream.close();
+//                text = stringBuilder.toString();
+//            }
+//        } catch (FileNotFoundException e) {
+//            //Log your error with Log.e
+//        } catch (IOException e) {
+//            //Log your error with Log.e
+//        }
+////Use Gson to recreate your Object from the text String
+//        return text;
+//
+//    }
+//
+//    public void saveUsersToFile(String data) {
+//        ObjectOutput out;
+//        try {
+//            File outFile = new File(Environment.getExternalStorageDirectory(), "users.txt");
+//            FileOutputStream fileOutputStream = new FileOutputStream(outFile);
+//
+//            fileOutputStream.write(data.getBytes());
+//            fileOutputStream.flush();
+//            fileOutputStream.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
+//
+//    public void saveResultsToFile(String data) {
+//
+//        ObjectOutput out;
+//        try {
+//            File outFile = new File(Environment.getExternalStorageDirectory(), "results.txt");
+//            FileOutputStream fileOutputStream = new FileOutputStream(outFile);
+//
+//            fileOutputStream.write(data.getBytes());
+//            fileOutputStream.flush();
+//            fileOutputStream.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+//
+//    public String loadResultsFromFile() {
+//
+//        Gson gson = new Gson();
+//        String text = "";
+//
+////Make sure to use a try-catch statement to catch any errors
+//        try {
+//            //Make your FilePath and File
+//
+//            File yourFile = new File(Environment.getExternalStorageDirectory(), "results.txt");
+//
+//            //Make an InputStream with your File in the constructor
+//            InputStream inputStream = new FileInputStream(yourFile);
+//            StringBuilder stringBuilder = new StringBuilder();
+//            //Check to see if your inputStream is null
+//            //If it isn't use the inputStream to make a InputStreamReader
+//            //Use that to make a BufferedReader
+//            //Also create an empty String
+//            if (inputStream != null) {
+//                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+//                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//                String receiveString = "";
+//                //Use a while loop to append the lines from the Buffered reader
+//                while ((receiveString = bufferedReader.readLine()) != null) {
+//                    stringBuilder.append(receiveString);
+//                }
+//                //Close your InputStream and save stringBuilder as a String
+//                inputStream.close();
+//                text = stringBuilder.toString();
+//            }
+//        } catch (FileNotFoundException e) {
+//            //Log your error with Log.e
+//        } catch (IOException e) {
+//            //Log your error with Log.e
+//        }
+////Use Gson to recreate your Object from the text String
+//        return text;
+//
+//    }
 
 
 }

@@ -40,11 +40,11 @@ public class HistoryActivity extends AppCompatActivity {
 
         saveData sv = new saveData();
 
-        Gson gson = new Gson();
+       // Gson gson = new Gson();
 
-        String myData = gson.toJson(resultsDB);
-        Log.d("my data", myData);
-        sv.saveResultsToFile(myData);
+       // String myData = gson.toJson(resultsDB);
+       // Log.d("my data", myData);
+       // sv.saveResultsToFile(myData);
 
         TableLayout prices = (TableLayout) findViewById(R.id.testTable);
         //TableRow cityNames = (TableRow) findViewById(R.id.cityName);
@@ -73,7 +73,8 @@ public class HistoryActivity extends AppCompatActivity {
                 deleteRow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //
+                        //cityName.setText(View.GONE);
+                        //countryName.setText(View.GONE);
                         cityName.setVisibility(View.GONE);
                         countryName.setVisibility(View.GONE);
                         deleteRow.setVisibility(View.GONE);

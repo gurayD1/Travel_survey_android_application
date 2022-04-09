@@ -44,6 +44,7 @@ public class LogInPageActivity extends AppCompatActivity {
 
         checkForAccessFileSystemPermission();
 
+
     }
 
     private void checkForAccessFileSystemPermission() {
@@ -104,6 +105,8 @@ public class LogInPageActivity extends AppCompatActivity {
 
     }
 
+
+
     public void signUpClicked(View view) {
         String uName = sUserName.getText().toString();
         String password = sPassword.getText().toString();
@@ -129,11 +132,13 @@ public class LogInPageActivity extends AppCompatActivity {
             UsersDB allUsers = UsersDB.getInstance();
             allUsers.addUser(user);
 
-            Gson gson = new Gson();
+         //   Gson gson = new Gson();
 
-            String myData = gson.toJson(allUsers);
-            Log.d("my data", myData);
-            saveDataInstance.saveUsersToFile(myData);
+           // String myData = gson.toJson(allUsers);
+          //  Log.d("my data", myData);
+           // saveDataInstance.saveUsersToFile(myData);
+
+            saveDataInstance.saveUsersToFile_new(allUsers);
 
             //Create intent
             Intent intent = new Intent(this, ClimateActivity.class);

@@ -8,36 +8,6 @@
     tools:context=".LogInPageActivity">
 
 
-    <LinearLayout
-        android:id="@+id/layout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        app:layout_constraintTop_toBottomOf="@+id/layout6"
-        tools:layout_editor_absoluteX="0dp">
-
-        <TextView
-            android:id="@+id/labelFullName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_weight="0.8"
-            android:text="Full Name" />
-
-        <EditText
-
-            android:id="@+id/sFullName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Full Name"
-            android:text=""
-            android:textSize="15sp"
-
-            tools:ignore="TouchTargetSizeCheck" />
-    </LinearLayout>
-
     <TextView
         android:id="@+id/titleFirst"
         android:layout_width="wrap_content"
@@ -64,26 +34,26 @@
         >
 
         <TextView
-            android:id="@+id/labelEmail"
+            android:id="@+id/labelUserName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_weight="0.8"
-            android:text="Email"
+            android:text="User Name"
             />
 
 
         <EditText
-            android:id="@+id/loginEmail"
+            android:id="@+id/loginUserName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="email@example.com"
-            android:text=""
+            android:hint="User Name"
             android:textSize="15sp"
+            android:text=""
 
 
-            tools:ignore="TouchTargetSizeCheck" />
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -111,9 +81,9 @@
             android:layout_weight="1"
             android:hint="Password"
             android:inputType="textPassword"
-            android:text=""
             android:textSize="15sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:text=""
+            />
 
     </LinearLayout>
 
@@ -133,7 +103,7 @@
         />
 
     <LinearLayout
-        android:id="@+id/layout6"
+        android:id="@+id/layout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -143,35 +113,35 @@
         tools:layout_editor_absoluteX="0dp">
 
         <TextView
-            android:id="@+id/labelRegisterEmail"
+            android:id="@+id/labelUserName2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_weight="0.8"
-            android:text="Email" />
+            android:text="User Name" />
 
         <EditText
 
-            android:id="@+id/sEmail"
+            android:id="@+id/sUserName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="email@example.com"
-            android:text=""
+            android:hint="User Name"
             android:textSize="15sp"
+            android:text=""
 
-            tools:ignore="TouchTargetSizeCheck" />
+            />
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/layout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintTop_toBottomOf="@+id/layout3"
-        tools:layout_editor_absoluteX="16dp">
+        tools:layout_editor_absoluteX="0dp">
 
         <TextView
 
@@ -190,17 +160,19 @@
             android:layout_weight="1"
             android:hint="Password"
             android:inputType="textPassword"
-            android:text=""
             android:textSize="15sp"
+            android:text=""
 
-            tools:ignore="TouchTargetSizeCheck" />
+            />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/layout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintTop_toBottomOf="@+id/layout4"
@@ -221,9 +193,8 @@
             android:layout_weight="1"
             android:hint="Confirm Password"
             android:inputType="textPassword"
-            android:text=""
             android:textSize="15sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:text="" />
 
     </LinearLayout>
 
@@ -241,6 +212,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout5"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.031" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

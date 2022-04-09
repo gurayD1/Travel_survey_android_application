@@ -2,14 +2,30 @@ package com.group.project;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersDB {
+public class UsersDB implements Serializable {
     static private UsersDB usersDB = null;
     @SerializedName("users")
     private List<UserModel> myUsers = new ArrayList<>();
 
+    static private File filePath = null;
+
+
+
+
+    public static void setFilePath(File f){
+        filePath = f;
+
+    }
+
+    public static File getFilePath(){
+       return filePath;
+
+    }
 
     public void addUser(UserModel u) {
         myUsers.add(u);
@@ -45,8 +61,10 @@ public class UsersDB {
     }
 
     public static Boolean validateUser(UserModel u) {
+        saveData ss = new saveData();
+       // for (UserModel usr : UsersDB.getAllUsers()) {
+        for (UserModel usr : ss.loadUsersFromFile_new().getAllUsers()) {
 
-        for (UserModel usr : UsersDB.getInstance().myUsers) {
             if (usr.getUserName().equals(u.getUserName())) {
 
                 if (usr.getPassword().equals(u.getPassword())) {
