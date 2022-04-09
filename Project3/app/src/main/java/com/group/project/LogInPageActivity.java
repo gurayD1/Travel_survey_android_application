@@ -105,6 +105,12 @@ public class LogInPageActivity extends AppCompatActivity {
 
     }
 
+    public void forgotClicked(){
+
+
+
+    }
+
 
 
     public void signUpClicked(View view) {
