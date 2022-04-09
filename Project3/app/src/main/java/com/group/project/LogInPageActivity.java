@@ -1,9 +1,12 @@
 package com.group.project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +16,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 public class LogInPageActivity extends AppCompatActivity {
+    private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE  = 1;
+    private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE  = 2;
     EditText loginUserName;
     EditText loginPassword;
 
@@ -37,7 +42,30 @@ public class LogInPageActivity extends AppCompatActivity {
         String sharedSaveName = "saveUserName";
         SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
 
+        checkForAccessFileSystemPermission();
+
     }
+
+    private void checkForAccessFileSystemPermission() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE ) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE },
+                    MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
+
+        }
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE  ) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE  },
+                    MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
+
+        }
+    }
+
 
     public void logInClicked(View view) {
         String uName = loginUserName.getText().toString();
