@@ -1,5 +1,6 @@
 package com.group.project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -26,11 +27,16 @@ public class SendAccessActivity extends AppCompatActivity {
         userModel.setEmail(userEmail.getText().toString());
         userModel.setAccessCode(userAccessCode.getText().toString());
 
-        if(UsersDB.resetPassword(userModel)){
+        UserModel userModel1 = UsersDB.resetPassword(userModel);
+        if(userModel1 != null){
 
              Toast.makeText(this,
                     "information is correct",
                     Toast.LENGTH_SHORT).show();
+
+           Intent intent = new Intent(this,setNewPasswordActivity.class);
+           intent.putExtra("userInstance", userModel1);
+            startActivity(intent);
 
         }else {
              Toast.makeText(this,
@@ -40,5 +46,8 @@ public class SendAccessActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void submitPassword1(View view) {
     }
 }

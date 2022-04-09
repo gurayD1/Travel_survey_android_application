@@ -67,20 +67,16 @@ public class HistoryActivity extends AppCompatActivity {
                 // countryName.setPadding(1, 5, 1, 5);
 
                 Button deleteRow = new Button(this);
+                deleteRow.setText(String.valueOf("Delete"));
 
-                //tr.setVisibility(View.GONE);
 
                 deleteRow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //cityName.setText(View.GONE);
-                        //countryName.setText(View.GONE);
 
-
-                        //cityName.setText(String.valueOf(result1.setCityName()));
-                        cityName.setText(String.valueOf(result1.getCityName()));
-                        countryName.setText(String.valueOf(result1.getCountryName()));
-                        deleteRow.setText(String.valueOf(result1.getCityName()));
+                        cityName.setText(String.valueOf(null));
+                        countryName.setText(String.valueOf(null));
+                       // deleteRow.setText(String.valueOf(result1.getCityName()));
                     }
                 });
 
