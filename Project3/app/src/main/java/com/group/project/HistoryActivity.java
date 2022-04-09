@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -15,17 +15,39 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 public class HistoryActivity extends AppCompatActivity {
-
+    String user_name = "";
+    Button deleteRow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+        
+        ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
+
+        boolean seeHistory = getIntent().getBooleanExtra("seeHistory", false);
 
         String sharedSaveName = "saveUserName";
         SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
-        String user_name = mPreferences.getString("user_name", "");
+        user_name = mPreferences.getString("user_name", "");
+
+
+        ResultsDB resultsDB = ResultsDB.getInstance();
+
+
+        if (!seeHistory) {
+            resultsDB.addResult(result);
+        }
+
+        saveData sv = new saveData();
+
+        Gson gson = new Gson();
+
+        String myData = gson.toJson(resultsDB);
+        Log.d("my data", myData);
+        sv.saveResultsToFile(myData);
 
         TableLayout prices = (TableLayout) findViewById(R.id.testTable);
+        //TableRow cityNames = (TableRow) findViewById(R.id.cityName);
         prices.setStretchAllColumns(true);
         prices.bringToFront();
         for (ResultModel result1 : ResultsDB.getAllResults()) {
@@ -33,58 +55,35 @@ public class HistoryActivity extends AppCompatActivity {
             if (user_name.equals(result1.getUserName())) {
                 TableRow tr = new TableRow(this);
 
-                TextView userName = new TextView(this);
-                userName.setText(result1.getUserName());
-                userName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                userName.setPadding(10, 10, 10, 10);
-
-                TextView id = new TextView(this);
-                id.setText(String.valueOf(result1.getId()));
-                id.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                id.setPadding(10, 10, 10, 10);
-
-                TextView budget = new TextView(this);
-                budget.setText(String.valueOf(result1.getBudget()));
-                budget.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                budget.setPadding(10, 10, 10, 10);
-
-                TextView climate = new TextView(this);
-                climate.setText(result1.getClimate());
-                climate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                climate.setPadding(10, 10, 10, 10);
-
-                TextView landScape = new TextView(this);
-                landScape.setText(String.valueOf(result1.getLandscape()));
-                landScape.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                landScape.setPadding(10, 10, 10, 10);
-
-                TextView phobia = new TextView(this);
-                phobia.setText(String.valueOf(result1.getPhobia()));
-                phobia.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                phobia.setPadding(10, 10, 10, 10);
 
                 TextView cityName = new TextView(this);
                 cityName.setText(String.valueOf(result1.getCityName()));
-                cityName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                cityName.setPadding(10, 10, 10, 10);
+                cityName.setTextSize(20);
+                //cityName.setPadding(1, 5, 1, 5);
 
                 TextView countryName = new TextView(this);
                 countryName.setText(String.valueOf(result1.getCountryName()));
-                countryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                countryName.setPadding(10, 10, 10, 10);
+                countryName.setTextSize(20);
+                // countryName.setPadding(1, 5, 1, 5);
 
+                Button deleteRow = new Button(this);
 
-                tr.addView(userName);
-                tr.addView(id);
-                tr.addView(budget);
+                //tr.setVisibility(View.GONE);
 
-                tr.addView(climate);
-                tr.addView(landScape);
-                tr.addView(phobia);
+                deleteRow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //cityName.setText(View.GONE);
+                        //countryName.setText(View.GONE);
+                        cityName.setVisibility(View.GONE);
+                        countryName.setVisibility(View.GONE);
+                        deleteRow.setVisibility(View.GONE);
+                    }
+                });
 
                 tr.addView(cityName);
                 tr.addView(countryName);
-
+                tr.addView(deleteRow);
 
                 prices.addView(tr);
             }
@@ -92,6 +91,7 @@ public class HistoryActivity extends AppCompatActivity {
         }
 
     }
+
 
     // Start button clicked
     public void logOutButtonClicked(View view) {
@@ -104,10 +104,6 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void startOverButtonClicked(View view) {
         Intent intent = new Intent(this, ClimateActivity.class);
-        String sharedSaveName = "saveUserName";
-        SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
-        String user_name = mPreferences.getString("user_name", "");
-
         ResultModel result = new ResultModel();
         result.setUserName(user_name);
         intent.putExtra("Result", result);
