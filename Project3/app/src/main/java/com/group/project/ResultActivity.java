@@ -8,80 +8,109 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
 public class ResultActivity extends AppCompatActivity {
-
+    String user_name = "";
+    Button deleteRow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.activity_result_page);
 
-        // Get result
+        TextView tv = (TextView) findViewById(R.id.textView1);
         ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
 
-        // Set see history to false
         boolean seeHistory = getIntent().getBooleanExtra("seeHistory", false);
 
-        // Get results database
+        String sharedSaveName = "saveUserName";
+        SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
+        user_name = mPreferences.getString("user_name", "");
+
+
         ResultsDB resultsDB = ResultsDB.getInstance();
 
-        // Add the result to database if see history wasn't pressed
+
         if (!seeHistory) {
             resultsDB.addResult(result);
         }
 
-        // Save data to results file
         saveData sv = new saveData();
+
         Gson gson = new Gson();
+
         String myData = gson.toJson(resultsDB);
         Log.d("my data", myData);
         sv.saveResultsToFile(myData);
 
-        // Get buttons, text and image
-        TextView cityName = (TextView) findViewById(R.id.txtCityName);
-        ImageView cityImg = (ImageView) findViewById(R.id.imgCity);
-        TextView cityDesc = (TextView) findViewById(R.id.txtCityDescription);
-        Button btnMoreInfo = (Button) findViewById(R.id.btnMoreInfo);
-        Button btnMap = (Button) findViewById(R.id.btnMap);
+        TableLayout prices = (TableLayout) findViewById(R.id.testTable);
+       //TableRow cityNames = (TableRow) findViewById(R.id.cityName);
+        prices.setStretchAllColumns(true);
+        prices.bringToFront();
+        for (ResultModel result1 : ResultsDB.getAllResults()) {
 
-        cityName.setText(result.getCityName());
-        cityImg.setImageResource(result.getImage());
-        cityDesc.setText(result.getDescription());
+            if (user_name.equals(result1.getUserName())) {
+                TableRow tr = new TableRow(this);
+
+
+                TextView cityName = new TextView(this);
+                cityName.setText(String.valueOf(result1.getCityName()));
+                cityName.setTextSize(20);
+                //cityName.setPadding(1, 5, 1, 5);
+
+                TextView countryName = new TextView(this);
+                countryName.setText(String.valueOf(result1.getCountryName()));
+                countryName.setTextSize(20);
+               // countryName.setPadding(1, 5, 1, 5);
+
+                Button deleteRow = new Button(this);
+
+                //tr.setVisibility(View.GONE);
+
+                deleteRow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //cityName.setText(View.GONE);
+                        //countryName.setText(View.GONE);
+                        cityName.setVisibility(View.GONE);
+                        countryName.setVisibility(View.GONE);
+                        deleteRow.setVisibility(View.GONE);
+                    }
+                });
+
+                tr.addView(cityName);
+                tr.addView(countryName);
+                tr.addView(deleteRow);
+
+                prices.addView(tr);
+            }
+
+        }
+
     }
 
-    public void startOver(View view) {
-        // Create intent
+
+    // Start button clicked
+    public void logOutButtonClicked(View view) {
+
+        Intent intent = new Intent(this, LogInPageActivity.class);
+        ResultModel result = new ResultModel();
+        intent.putExtra("Result", result);
+        startActivity(intent);
+    }
+
+    public void startOverButtonClicked(View view) {
         Intent intent = new Intent(this, ClimateActivity.class);
-
-        // Get result
-        ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
-
-        // Pass result
+        ResultModel result = new ResultModel();
+        result.setUserName(user_name);
         intent.putExtra("Result", result);
-
-        // Start the initial activity page
         startActivity(intent);
 
     }
 
-    public void seeHistory(View view) {
 
-        // Create intent
-        Intent intent = new Intent(this, HistoryActivity.class);
-
-        /// Get result
-        ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
-
-        // Pass result and history
-        intent.putExtra("Result", result);
-        intent.putExtra("seeHistory", true);
-
-        // Start the history activity page
-        startActivity(intent);
-
-    }
 }
