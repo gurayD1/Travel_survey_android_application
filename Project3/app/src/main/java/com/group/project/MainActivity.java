@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         UsersDB.setFilePath(this.getFilesDir());
 
         Log.d("file name", this.getFilesDir().toString());
-        Toast.makeText(this, this.getFilesDir().toString(), Toast.LENGTH_SHORT).show();
     }
 
     // Start button clicked
