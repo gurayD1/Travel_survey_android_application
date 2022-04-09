@@ -73,8 +73,7 @@ public class HistoryActivity extends AppCompatActivity {
                 deleteRow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //cityName.setText(View.GONE);
-                        //countryName.setText(View.GONE);
+                        //
                         cityName.setVisibility(View.GONE);
                         countryName.setVisibility(View.GONE);
                         deleteRow.setVisibility(View.GONE);
