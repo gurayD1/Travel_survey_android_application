@@ -50,22 +50,63 @@ public class UsersDB implements Serializable {
         }
     }
 
-    public static Boolean checkUserExists(String username) {
+    public static Boolean checkUserExists(String userEmail) {
 
         for (UserModel usr : UsersDB.getInstance().myUsers) {
-            if (usr.getUserName().equals(username)) {
+            if (usr.getEmail().equals(userEmail)) {
                 return true;
             }
         }
         return false;
     }
 
-    public static Boolean validateUser(UserModel u) {
+
+    public static UserModel sendExistUser(String userEmail) {
+        UserModel userModel = null;
+        for (UserModel usr : UsersDB.getInstance().myUsers) {
+            if (usr.getEmail().equals(userEmail)) {
+                return usr;
+            }
+        }
+        return userModel;
+    }
+
+    public static UserModel resetPassword(UserModel u) {
         saveData ss = new saveData();
-       // for (UserModel usr : UsersDB.getAllUsers()) {
         for (UserModel usr : ss.loadUsersFromFile_new().getAllUsers()) {
 
-            if (usr.getUserName().equals(u.getUserName())) {
+            if (usr.getEmail().equals(u.getEmail())) {
+
+                if (usr.getAccessCode().equals(u.getAccessCode())) {
+                    return usr;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public static void resetUserPassword(UserModel u, String newpassword) {
+        saveData ss = new saveData();
+        for (UserModel usr : ss.loadUsersFromFile_new().getAllUsers()) {
+
+            if (usr.getEmail().equals(u.getEmail())) {
+
+                usr.setPassword(newpassword);
+
+            }
+        }
+
+
+    }
+
+
+
+    public static Boolean validateUser(UserModel u) {
+        saveData ss = new saveData();
+        for (UserModel usr : ss.loadUsersFromFile_new().getAllUsers()) {
+
+            if (usr.getEmail().equals(u.getEmail())) {
 
                 if (usr.getPassword().equals(u.getPassword())) {
                     return true;

@@ -1,21 +1,71 @@
 package com.group.project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Random;
+
 public class SendResetActivity extends AppCompatActivity {
 
+    EditText email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_reset_code);
+
+        email = findViewById(R.id.textViewEmail);
     }
 
     public void submitClicked(View view) {
+      String userEmail =  email.getText().toString();
+        sendMail(userEmail);
+
+
+    }
+
+    private  void sendMail(String mail){
+      //  String mail = "guray1955@gmail.com";
+
+        if(UsersDB.checkUserExists(mail)) {
+
+            UserModel userModel = UsersDB.sendExistUser(mail);
+            String message = getSaltString();
+            userModel.setAccessCode(message);
+            String subject = "Reset my Password";
+
+            JavaMailAPI javaMailAPI = new JavaMailAPI(this, mail, subject, message);
+            javaMailAPI.execute();
+
+        }
+        else {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Email does not exist!",
+                    Toast.LENGTH_SHORT);
+        }
+
+    }
+
+    protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 5) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
     }
 
     public void accessCodeClicked(View view) {
+
+        Intent intent = new Intent(this,SendAccessActivity.class);
+        startActivity(intent);
     }
 }

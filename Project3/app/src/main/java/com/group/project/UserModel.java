@@ -10,6 +10,10 @@ public class UserModel implements Serializable {
     @SerializedName("password")
     private String password;
 
+    private String accessCode;
+
+    private String email;
+
 
     public String getUserName() {
         return userName;
@@ -26,5 +30,13 @@ public class UserModel implements Serializable {
     public void setPassword(String p) {
         this.password = p;
     }
+
+    public String getAccessCode(){return accessCode;}
+
+    public void setAccessCode(String acc){ accessCode = acc; }
+
+    public String getEmail(){return email;}
+
+    public void setEmail(String e){ email = e; }
 
 }
