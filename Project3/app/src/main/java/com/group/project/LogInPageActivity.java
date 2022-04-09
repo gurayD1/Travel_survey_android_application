@@ -18,12 +18,13 @@ import com.google.gson.Gson;
 public class LogInPageActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE  = 1;
     private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE  = 2;
-    EditText loginUserName;
+    EditText loginEmail;
     EditText loginPassword;
 
     EditText sUserName;
     EditText sPassword;
     EditText sCPassword;
+    EditText sEmail;
 
     saveData saveDataInstance = new saveData();
 
@@ -32,18 +33,17 @@ public class LogInPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_page);
 
-        loginUserName = (EditText) findViewById(R.id.loginEmail);
+        loginEmail = (EditText) findViewById(R.id.loginEmail);
         loginPassword = (EditText) findViewById(R.id.loginPassword);
 
-        sUserName = (EditText) findViewById(R.id.sEmail);
+        sEmail = (EditText) findViewById(R.id.sEmail);
         sPassword = (EditText) findViewById(R.id.sPassword);
         sCPassword = (EditText) findViewById(R.id.sCPassword);
-
+        sUserName = (EditText) findViewById(R.id.sFullName);
         String sharedSaveName = "saveUserName";
         SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
 
         checkForAccessFileSystemPermission();
-
 
     }
 
@@ -69,10 +69,10 @@ public class LogInPageActivity extends AppCompatActivity {
 
 
     public void logInClicked(View view) {
-        String uName = loginUserName.getText().toString();
+        String uEmail = loginEmail.getText().toString();
         String password = loginPassword.getText().toString();
         UserModel u = new UserModel();
-        u.setUserName(uName);
+        u.setEmail(uEmail);
         u.setPassword(password);
 
 
@@ -81,15 +81,15 @@ public class LogInPageActivity extends AppCompatActivity {
             Intent intent = new Intent(this, HistoryAndNewTestActivity.class);
             ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
 
-            result.setUserName(uName);
+            result.setUserName(uEmail);
             intent.putExtra("Result", result);
-            intent.putExtra("user_name", uName);
+            intent.putExtra("user_name", uEmail);
 
 
             String sharedSaveName = "saveUserName";
             SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
             SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-            preferencesEditor.putString("user_name", uName);
+            preferencesEditor.putString("user_name", uEmail);
             preferencesEditor.apply();
 
             // Start the first activity page
@@ -105,22 +105,26 @@ public class LogInPageActivity extends AppCompatActivity {
 
     }
 
-    public void forgotClicked(){
+    public void forgotClicked(View view){
 
-
+        Intent intent = new Intent(this,SendResetActivity.class);
+        startActivity(intent);
 
     }
 
 
 
     public void signUpClicked(View view) {
+        String uEmail = sEmail.getText().toString();
         String uName = sUserName.getText().toString();
         String password = sPassword.getText().toString();
         String cPassword = sCPassword.getText().toString();
+
         UsersDB usersDB = UsersDB.getInstance();
 
+
         // Check if username is already registered and so error if that's the case
-        if (usersDB.checkUserExists(uName)) {
+        if (usersDB.checkUserExists(uEmail)) {
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Username is already registered!",
                     Toast.LENGTH_SHORT);
@@ -130,10 +134,12 @@ public class LogInPageActivity extends AppCompatActivity {
         // Otherwise check if the passwords match
         else if (password.equals(cPassword)) {
             UserModel user = new UserModel();
+
+            user.setEmail(uEmail);
             user.setUserName(uName);
             user.setPassword(password);
 
-            usersDB.addUser(user);
+            //usersDB.addUser(user);
 
             UsersDB allUsers = UsersDB.getInstance();
             allUsers.addUser(user);
@@ -149,14 +155,14 @@ public class LogInPageActivity extends AppCompatActivity {
             //Create intent
             Intent intent = new Intent(this, ClimateActivity.class);
             ResultModel result = new ResultModel();
-            result.setUserName(uName);
+            result.setUserName(uEmail);
             intent.putExtra("Result", result);
-            intent.putExtra("user_name", uName);
+            intent.putExtra("user_name", uEmail);
 
             String sharedSaveName = "saveUserName";
             SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
             SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-            preferencesEditor.putString("user_name", uName);
+            preferencesEditor.putString("user_name", uEmail);
             preferencesEditor.apply();
 
             // Start the first activity page

@@ -9,6 +9,9 @@
     android:background="#F8CB47"
     tools:context=".SendAccessActivity">
 
+
+
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -53,5 +56,20 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+    <EditText
+        android:id="@+id/textViewEmail"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:hint="Email Address"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAccessCode"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
