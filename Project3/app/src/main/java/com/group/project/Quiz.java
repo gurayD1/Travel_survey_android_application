@@ -134,7 +134,7 @@ public class Quiz {
         return countryList;
     }
 
-    public ArrayList<String> getFinalCities(ResultModel result) {
+    public ArrayList<CityModel> getFinalCities(ResultModel result) {
         // Create city DB
         CityDB cityDB = new CityDB();
         CityModel[] allCities = cityDB.GetAllCities();
@@ -151,7 +151,14 @@ public class Quiz {
             }
         }
 
-        ArrayList<String> finalCities = new ArrayList<String>(citySet);
+        ArrayList<String> filteredNames = new ArrayList<String>(citySet);
+        ArrayList<CityModel> finalCities = new ArrayList<CityModel>();
+
+        // Add the list of filtered city models to a new array list
+        for (String city : filteredNames) {
+            // Get city from database
+            finalCities.add(cityDB.GetCity(city));
+        }
 
         return finalCities;
     }

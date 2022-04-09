@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +19,9 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 public class ResultActivity extends AppCompatActivity {
+
+    private static final int URL_REQUEST = 1000;
+    private static final int MAP_REQUEST = 1100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +44,6 @@ public class ResultActivity extends AppCompatActivity {
 
         // Save data to results file
         saveData sv = new saveData();
-      //  Gson gson = new Gson();
-       // String myData = gson.toJson(resultsDB);
-        //Log.d("my data", myData);
-       // sv.saveResultsToFile(myData);
-
         sv.saveResultsToFile_new(resultsDB);
 
         // Get buttons, text and image
@@ -49,10 +52,10 @@ public class ResultActivity extends AppCompatActivity {
         TextView cityDesc = (TextView) findViewById(R.id.txtCityDescription);
         Button btnMoreInfo = (Button) findViewById(R.id.btnMoreInfo);
         Button btnMap = (Button) findViewById(R.id.btnMap);
-
         cityName.setText(result.getCityName());
-        cityImg.setImageResource(result.getImage());
         cityDesc.setText(result.getDescription());
+        cityImg.setImageResource(getResources().getIdentifier(result.getImage(),
+                "drawable", this.getPackageName()));
     }
 
     public void startOver(View view) {
@@ -84,6 +87,29 @@ public class ResultActivity extends AppCompatActivity {
 
         // Start the history activity page
         startActivity(intent);
+
+    }
+
+    public void moreInfoClicked(View view) {
+        // Get result
+        ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
+
+        String url = result.getUrl();
+        Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        if (urlIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(urlIntent, URL_REQUEST);
+        }
+    }
+
+    public void openMapClicked(View view) {
+        ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
+        String parameter = result.getLatitude() + ", " + result.getLongitude();
+        Uri mapURI = Uri.parse("geo:" + parameter);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+        mapIntent.setData(mapURI);
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(mapIntent, MAP_REQUEST);
+        }
 
     }
 }

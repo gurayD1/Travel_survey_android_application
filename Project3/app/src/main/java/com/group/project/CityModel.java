@@ -15,13 +15,11 @@ public class CityModel implements Serializable {
     private String phobia;
     private String landscape;
     private String url;
-
-    @DrawableRes
-    private int image;
+    private String image;
 
     public CityModel(String name, String country, String description, String latitude, String longitude,
                      String budget, String phobia, String landscape,
-                     String url, @DrawableRes int image) {
+                     String url, String image) {
         this.name = name;
         this.country = country;
         this.description = description;
@@ -66,13 +64,10 @@ public class CityModel implements Serializable {
         return landscape;
     }
 
-    public String url() {
+    public String getUrl() {
         return url;
     }
 
-    @DrawableRes
-    public int getImage() {
-        return image;
-    }
+    public String getImage() { return image; }
 
 }

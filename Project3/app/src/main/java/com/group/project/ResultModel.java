@@ -25,8 +25,14 @@ public class ResultModel implements Serializable {
     private String userName;
     @SerializedName("description")
     private String description;
+    @SerializedName("url")
+    private String url;
     @SerializedName("image")
-    @DrawableRes private int image;
+    private String image;
+    @SerializedName("latitude")
+    private String latitude;
+    @SerializedName("longitude")
+    private String longitude;
 
     public ResultModel() {
         Id = ResultsDB.getInstance().getID();
@@ -66,10 +72,24 @@ public class ResultModel implements Serializable {
         return userName;
     }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public @DrawableRes int getImage() {
+    public String getUrl() {
+        return url;
+    }
+
+    public String getImage() {
         return image;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
     }
 
     public void setUserName(String name) {
@@ -82,6 +102,10 @@ public class ResultModel implements Serializable {
 
     public void setCityName(String name) {
         this.cityName = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setClimate(String climate) {
@@ -98,6 +122,22 @@ public class ResultModel implements Serializable {
 
     public void setBudget(String budget) {
         this.budget = budget;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
 
