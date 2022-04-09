@@ -36,10 +36,12 @@ public class ResultActivity extends AppCompatActivity {
 
         // Save data to results file
         saveData sv = new saveData();
-        Gson gson = new Gson();
-        String myData = gson.toJson(resultsDB);
-        Log.d("my data", myData);
-        sv.saveResultsToFile(myData);
+      //  Gson gson = new Gson();
+       // String myData = gson.toJson(resultsDB);
+        //Log.d("my data", myData);
+       // sv.saveResultsToFile(myData);
+
+        sv.saveResultsToFile_new(resultsDB);
 
         // Get buttons, text and image
         TextView cityName = (TextView) findViewById(R.id.txtCityName);
