@@ -32,7 +32,8 @@ public class HistoryActivity extends AppCompatActivity {
         ResultsDB resultsDB = ResultsDB.getInstance();
 
         if (!seeHistory) {
-            resultsDB.addResult(result);
+            if(result != null){
+            resultsDB.addResult(result);}
         }
 
         if (ResultsDB.getAllResults() != null) {
