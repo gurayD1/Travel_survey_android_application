@@ -3,6 +3,7 @@ package com.group.project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -65,6 +66,11 @@ public class CityActivity extends AppCompatActivity {
         result.setLatitude(cityList.get(0).getLatitude());
         result.setLongitude(cityList.get(0).getLongitude());
 
+        String sharedSaveName = "saveUserName";
+        SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
+        String userName = mPreferences.getString("user_name", "");
+        result.setUserName(userName);
+
         intent.putExtra("Result", result);
         // Start the first activity page
         startActivity(intent);
@@ -82,6 +88,11 @@ public class CityActivity extends AppCompatActivity {
         result.setLatitude(cityList.get(1).getLatitude());
         result.setLongitude(cityList.get(1).getLongitude());
 
+        String sharedSaveName = "saveUserName";
+        SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
+        String userName = mPreferences.getString("user_name", "");
+        result.setUserName(userName);
+
         intent.putExtra("Result", result);
         // Start the first activity page
         startActivity(intent);
@@ -98,6 +109,11 @@ public class CityActivity extends AppCompatActivity {
         result.setUrl(cityList.get(2).getUrl());
         result.setLatitude(cityList.get(2).getLatitude());
         result.setLongitude(cityList.get(2).getLongitude());
+
+        String sharedSaveName = "saveUserName";
+        SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
+        String userName = mPreferences.getString("user_name", "");
+        result.setUserName(userName);
 
         intent.putExtra("Result", result);
         // Start the first activity page

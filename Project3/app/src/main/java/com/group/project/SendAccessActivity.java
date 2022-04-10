@@ -35,7 +35,7 @@ public class SendAccessActivity extends AppCompatActivity {
                     "Successfully authorized!",
                     Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(this, setNewPasswordActivity.class);
+            Intent intent = new Intent(this, SetNewPasswordActivity.class);
             intent.putExtra("userInstance", userModel1);
             startActivity(intent);
 

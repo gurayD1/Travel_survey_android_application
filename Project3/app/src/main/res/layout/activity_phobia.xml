@@ -36,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@id/textView"
         app:layout_constraintVertical_bias="0.15" />
 
     <android.widget.Button
@@ -52,7 +52,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@id/textView"
         app:layout_constraintVertical_bias="0.35" />
 
     <android.widget.Button
@@ -68,7 +68,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@id/textView"
         app:layout_constraintVertical_bias="0.55" />
 
     <android.widget.Button
@@ -84,7 +84,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@id/textView"
         app:layout_constraintVertical_bias="0.75" />
 
     <android.widget.Button
@@ -92,15 +92,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/buttons"
-        android:text="Back"
+        android:onClick="backButtonClicked"
         android:padding="20px"
+        android:text="Back"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:onClick="backButtonClicked"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/buttonWildAnimals"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView"
         app:layout_constraintVertical_bias="0.95" />
 
     <android.widget.Button
@@ -108,15 +108,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/buttons"
-        android:text="Start Over!"
+        android:onClick="startOverButtonClicked"
         android:padding="20px"
+        android:text="Start Over!"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:onClick="startOverButtonClicked"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonWildAnimals"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@id/textView"
         app:layout_constraintVertical_bias="0.95" />
 
 

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class setNewPasswordActivity extends AppCompatActivity {
+public class SetNewPasswordActivity extends AppCompatActivity {
     EditText uPassword;
     EditText uCPassword;
 
@@ -34,9 +34,9 @@ public class setNewPasswordActivity extends AppCompatActivity {
 
             UsersDB.resetUserPassword(userModel, userPassword);
 
-            saveData saveDataInstance = new saveData();
+            SaveData saveDataInstance = new SaveData();
             UsersDB usersDB = UsersDB.getInstance();
-            saveDataInstance.saveUsersToFile_new(usersDB);
+            saveDataInstance.saveUsersToFile(usersDB);
 
 
             Intent intent = new Intent(this, MainActivity.class);

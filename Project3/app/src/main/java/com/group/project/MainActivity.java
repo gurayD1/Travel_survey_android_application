@@ -3,18 +3,13 @@ package com.group.project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity {
 
-    saveData saveDataInstance = new saveData();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         createFilePath();
     }
 
-    public void createFilePath(){
+    public void createFilePath() {
 
         UsersDB.setFilePath(this.getFilesDir());
 
@@ -32,32 +27,30 @@ public class MainActivity extends AppCompatActivity {
     // Start button clicked
     public void startButtonClicked(View view) {
 
-        Intent intent = new Intent(this, LogInPageActivity.class);
-
-     //   Gson gson = new Gson();
-
-        saveData saveDataInstance = new saveData();
-        UsersDB usersDB =  UsersDB.getInstance();
+        Intent intent;
+        SaveData saveDataInstance = new SaveData();
+        UsersDB usersDB = UsersDB.getInstance();
         ResultsDB resultsDB = ResultsDB.getInstance();
 
-//        //**
-//        usersDB =  gson.fromJson(saveDataInstance.loadUsersFromFile(), UsersDB.class);
-//        resultsDB =  gson.fromJson(saveDataInstance.loadResultsFromFile(), ResultsDB.class);
-//        //--
-
-        usersDB = saveDataInstance.loadUsersFromFile_new();
-        resultsDB =saveDataInstance.loadResultsFromFile_new();
-
+        usersDB = saveDataInstance.loadUsersFromFile();
+        resultsDB = saveDataInstance.loadResultsFromFile();
 
         UsersDB.setInstance(usersDB);
         ResultsDB.setInstance(resultsDB);
 
-
-
         ResultModel result = new ResultModel();
-       intent.putExtra("Result", result);
+
+        String sharedSaveName = "saveUserName";
+        SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
+
+        if (mPreferences.getString("user_name", "").length() == 0) {
+            intent = new Intent(this, LogInPageActivity.class);
+        }
+        else {
+            intent = new Intent(this, MenuActivity.class);
+        }
+        intent.putExtra("Result", result);
         startActivity(intent);
     }
-
 
 }

@@ -14,7 +14,7 @@
         android:background="@color/purple_700"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:paddingVertical="10dp"
+        android:paddingVertical="30dp"
         android:text="City Name"
         android:textColor="@color/white"
         android:textSize="36sp"
@@ -23,28 +23,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_h15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_h100"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="1" />
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/gl_h100"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gl_h15">
+        app:layout_constraintTop_toBottomOf="@id/txtCityName">
 
         <LinearLayout
             android:id="@+id/mainLayout"
@@ -57,7 +43,6 @@
                 android:id="@+id/imgCity"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
-                android:layout_margin="20dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +70,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtCityDescription">
+                app:layout_constraintTop_toBottomOf="@id/txtCityDescription">
 
                 <android.widget.Button
                     android:id="@+id/btnMoreInfo"
@@ -123,7 +108,7 @@
                 android:id="@+id/btnNewTest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/buttons"
                 android:onClick="startOver"
                 android:padding="20dp"
@@ -132,15 +117,13 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnLayout"
-
-                />
+                app:layout_constraintTop_toBottomOf="@id/btnLayout" />
 
             <android.widget.Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/buttons"
                 android:onClick="seeHistory"
                 android:padding="20dp"
@@ -149,9 +132,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnNewTest"
-
-                />
+                app:layout_constraintTop_toBottomOf="@id/btnNewTest" />
         </LinearLayout>
     </ScrollView>
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,8 +7,6 @@
 
     android:background="#F8CB47"
     tools:context=".SendAccessActivity">
-
-
 
 
     <TextView
@@ -33,16 +30,16 @@
         android:id="@+id/buttonSubmitAccessCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="@drawable/buttons"
         android:onClick="submitAccessClicked"
         android:text="Submit"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewAccessCode"/>
+        app:layout_constraintTop_toBottomOf="@id/textViewAccessCode" />
 
     <EditText
         android:id="@+id/textViewAccessCode"
@@ -55,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+        app:layout_constraintTop_toBottomOf="@id/textView1" />
 
     <EditText
         android:id="@+id/textViewEmail"
@@ -65,11 +62,10 @@
         android:hint="Email Address"
         android:minHeight="48dp"
         android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/textViewAccessCode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/textViewAccessCode"/>
-
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

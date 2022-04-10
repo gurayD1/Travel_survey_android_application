@@ -52,10 +52,14 @@ public class ResultsDB implements Serializable {
     }
 
     public static Integer getID() {
-        if (ResultsDB.getInstance().allResults == null) {
+        if (ResultsDB.getInstance().allResults == null ||
+                ResultsDB.getInstance().allResults.size() == 0) {
             return 1;
-        } else
-            return ResultsDB.getInstance().allResults.get(ResultsDB.getInstance().allResults.size() - 1).getId() + 1;
+        } else {
+            return ResultsDB.getInstance().allResults.
+                    get(ResultsDB.getInstance().allResults.size() - 1).getId() + 1;
+        }
+
     }
 
 }

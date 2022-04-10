@@ -8,12 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 public class LogInPageActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
@@ -26,7 +23,7 @@ public class LogInPageActivity extends AppCompatActivity {
     EditText sCPassword;
     EditText sEmail;
 
-    saveData saveDataInstance = new saveData();
+    SaveData saveDataInstance = new SaveData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +51,6 @@ public class LogInPageActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
-
         }
 
         if (ActivityCompat.checkSelfPermission(this,
@@ -63,7 +59,6 @@ public class LogInPageActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
-
         }
     }
 
@@ -75,10 +70,9 @@ public class LogInPageActivity extends AppCompatActivity {
         u.setEmail(uEmail);
         u.setPassword(password);
 
-
         if (UsersDB.validateUser(u)) {
             //Create intent
-            Intent intent = new Intent(this, HistoryAndNewTestActivity.class);
+            Intent intent = new Intent(this, MenuActivity.class);
             ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
 
             result.setUserName(uEmail);
@@ -104,10 +98,8 @@ public class LogInPageActivity extends AppCompatActivity {
     }
 
     public void forgotClicked(View view) {
-
         Intent intent = new Intent(this, SendResetActivity.class);
         startActivity(intent);
-
     }
 
     public void signUpClicked(View view) {
@@ -134,18 +126,10 @@ public class LogInPageActivity extends AppCompatActivity {
             user.setUserName(uName);
             user.setPassword(password);
 
-            //usersDB.addUser(user);
-
             UsersDB allUsers = UsersDB.getInstance();
             allUsers.addUser(user);
 
-            //   Gson gson = new Gson();
-
-            // String myData = gson.toJson(allUsers);
-            //  Log.d("my data", myData);
-            // saveDataInstance.saveUsersToFile(myData);
-
-            saveDataInstance.saveUsersToFile_new(allUsers);
+            saveDataInstance.saveUsersToFile(allUsers);
 
             //Create intent
             Intent intent = new Intent(this, ClimateActivity.class);
