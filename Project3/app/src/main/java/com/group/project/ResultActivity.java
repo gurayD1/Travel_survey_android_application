@@ -1,8 +1,11 @@
 package com.group.project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
-
+    private static final int MY_PERMISSIONS_INTERNET = 7;
     private static final int URL_REQUEST = 1000;
     private static final int MAP_REQUEST = 1100;
 
@@ -19,6 +22,8 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+
 
         // Get result
         ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
@@ -48,6 +53,8 @@ public class ResultActivity extends AppCompatActivity {
         cityDesc.setText(result.getDescription());
         cityImg.setImageResource(getResources().getIdentifier(result.getImage(),
                 "drawable", this.getPackageName()));
+
+        checkForInternetPermission();
     }
 
     public void startOver(View view) {
@@ -76,15 +83,28 @@ public class ResultActivity extends AppCompatActivity {
 
     }
 
+    private void checkForInternetPermission() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.INTERNET) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.INTERNET},
+                    MY_PERMISSIONS_INTERNET);
+        }
+
+
+    }
+
     public void moreInfoClicked(View view) {
         // Get result
         ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
 
         String url = result.getUrl();
         Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        if (urlIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(urlIntent, URL_REQUEST);
-        }
+        startActivityForResult(urlIntent, URL_REQUEST);
+//        if (urlIntent.resolveActivity(getPackageManager()) != null) {
+//            startActivityForResult(urlIntent, URL_REQUEST);
+//        }
     }
 
     public void openMapClicked(View view) {
@@ -93,9 +113,10 @@ public class ResultActivity extends AppCompatActivity {
         Uri mapURI = Uri.parse("geo:" + parameter);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW);
         mapIntent.setData(mapURI);
-        if (mapIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(mapIntent, MAP_REQUEST);
-        }
+        startActivityForResult(mapIntent, MAP_REQUEST);
+//        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+//            startActivityForResult(mapIntent, MAP_REQUEST);
+//        }
 
     }
 }
