@@ -3,20 +3,12 @@ package com.group.project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -43,8 +35,8 @@ public class ResultActivity extends AppCompatActivity {
         }
 
         // Save data to results file
-        saveData sv = new saveData();
-        sv.saveResultsToFile_new(resultsDB);
+        SaveData sv = new SaveData();
+        sv.saveResultsToFile(resultsDB);
 
         // Get buttons, text and image
         TextView cityName = (TextView) findViewById(R.id.txtCityName);
@@ -60,13 +52,7 @@ public class ResultActivity extends AppCompatActivity {
 
     public void startOver(View view) {
         // Create intent
-        Intent intent = new Intent(this, ClimateActivity.class);
-
-        // Get result
-        ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
-
-        // Pass result
-        intent.putExtra("Result", result);
+        Intent intent = new Intent(this, MainActivity.class);
 
         // Start the initial activity page
         startActivity(intent);

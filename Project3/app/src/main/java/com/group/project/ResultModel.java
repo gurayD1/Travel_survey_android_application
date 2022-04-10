@@ -1,14 +1,12 @@
 package com.group.project;
 
-import androidx.annotation.DrawableRes;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 public class ResultModel implements Serializable {
     @SerializedName("Id")
-    private int Id;
+    private int id;
     @SerializedName("climate")
     private String climate;
     @SerializedName("phobia")
@@ -35,7 +33,7 @@ public class ResultModel implements Serializable {
     private String longitude;
 
     public ResultModel() {
-        Id = ResultsDB.getInstance().getID();
+        id = ResultsDB.getInstance().getID();
     }
 
 
@@ -57,7 +55,7 @@ public class ResultModel implements Serializable {
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public String getCountryName() {

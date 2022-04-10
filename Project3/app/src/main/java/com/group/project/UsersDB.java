@@ -14,16 +14,13 @@ public class UsersDB implements Serializable {
 
     static private File filePath = null;
 
-
-
-
-    public static void setFilePath(File f){
+    public static void setFilePath(File f) {
         filePath = f;
 
     }
 
-    public static File getFilePath(){
-       return filePath;
+    public static File getFilePath() {
+        return filePath;
 
     }
 
@@ -72,8 +69,8 @@ public class UsersDB implements Serializable {
     }
 
     public static UserModel resetPassword(UserModel u) {
-        saveData ss = new saveData();
-        for (UserModel usr : ss.loadUsersFromFile_new().getAllUsers()) {
+        SaveData ss = new SaveData();
+        for (UserModel usr : ss.loadUsersFromFile().getAllUsers()) {
 
             if (usr.getEmail().equals(u.getEmail())) {
 
@@ -87,8 +84,8 @@ public class UsersDB implements Serializable {
     }
 
     public static void resetUserPassword(UserModel u, String newpassword) {
-        saveData ss = new saveData();
-        for (UserModel usr : ss.loadUsersFromFile_new().getAllUsers()) {
+        SaveData ss = new SaveData();
+        for (UserModel usr : ss.loadUsersFromFile().getAllUsers()) {
 
             if (usr.getEmail().equals(u.getEmail())) {
 
@@ -96,15 +93,11 @@ public class UsersDB implements Serializable {
 
             }
         }
-
-
     }
 
-
-
     public static Boolean validateUser(UserModel u) {
-        saveData ss = new saveData();
-        for (UserModel usr : ss.loadUsersFromFile_new().getAllUsers()) {
+        SaveData ss = new SaveData();
+        for (UserModel usr : ss.loadUsersFromFile().getAllUsers()) {
 
             if (usr.getEmail().equals(u.getEmail())) {
 
@@ -113,8 +106,6 @@ public class UsersDB implements Serializable {
                 }
             }
         }
-
         return false;
     }
-
 }

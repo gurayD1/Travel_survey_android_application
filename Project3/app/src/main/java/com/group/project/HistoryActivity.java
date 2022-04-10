@@ -5,22 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 public class HistoryActivity extends AppCompatActivity {
 
 
     String user_name = "";
-    Button deleteRow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,79 +29,48 @@ public class HistoryActivity extends AppCompatActivity {
         SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
         user_name = mPreferences.getString("user_name", "");
 
-
         ResultsDB resultsDB = ResultsDB.getInstance();
 
-
         if (!seeHistory) {
-            resultsDB.addResult(result);
+            if(result != null){
+            resultsDB.addResult(result);}
         }
 
-        saveData sv = new saveData();
+        if (ResultsDB.getAllResults() != null) {
 
-        // Gson gson = new Gson();
+            TableLayout resultsTable = (TableLayout) findViewById(R.id.testTable);
 
-        // String myData = gson.toJson(resultsDB);
-        // Log.d("my data", myData);
-        // sv.saveResultsToFile(myData);
-
-//        TableLayout prices = (TableLayout) findViewById(R.id.testTable);
-//        //TableRow cityNames = (TableRow) findViewById(R.id.cityName);
-//        prices.setStretchAllColumns(true);
-//        prices.bringToFront();
-
-        if (ResultsDB.getAllResults() == null) {
-
-        } else{
-
-            TableLayout prices = (TableLayout) findViewById(R.id.testTable);
-            //TableRow cityNames = (TableRow) findViewById(R.id.cityName);
-            prices.setStretchAllColumns(true);
-            prices.bringToFront();
+            resultsTable.setStretchAllColumns(true);
+            resultsTable.bringToFront();
             for (ResultModel result1 : ResultsDB.getAllResults()) {
 
                 if (user_name.equals(result1.getUserName())) {
                     TableRow tr = new TableRow(this);
 
-
                     TextView cityName = new TextView(this);
                     cityName.setText(String.valueOf(result1.getCityName()));
-                    cityName.setTextSize(20);
-                    //cityName.setPadding(1, 5, 1, 5);
+                    cityName.setTextSize(15);
+                    cityName.setPadding(0, 0, 30, 0);
 
                     TextView countryName = new TextView(this);
                     countryName.setText(String.valueOf(result1.getCountryName()));
-                    countryName.setTextSize(20);
-                    // countryName.setPadding(1, 5, 1, 5);
-
+                    countryName.setTextSize(15);
 
                     Button deleteRow = new Button(this);
-                    deleteRow.setText("delete");
+                    deleteRow.setText("Delete");
                     deleteRow.setId(result1.getId());
-
 
                     deleteRow.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
 
-                            if (ResultsDB.seleteResult(deleteRow.getId())) {
-
-                                 saveData saveData = new saveData();
-
-                                saveData.saveResultsToFile_new(ResultsDB.getInstance());
-
-
-
+                            if (ResultsDB.deleteResult(deleteRow.getId())) {
+                                SaveData saveData = new SaveData();
+                                saveData.saveResultsToFile(ResultsDB.getInstance());
 
                                 finish();
                                 startActivity(getIntent());
-
                             }
-
-
-//                        cityName.setText(String.valueOf(null));
-//                        countryName.setText(String.valueOf(null));
-                            // deleteRow.setText(String.valueOf(result1.getCityName()));
                         }
                     });
 
@@ -114,34 +78,36 @@ public class HistoryActivity extends AppCompatActivity {
                     tr.addView(countryName);
                     tr.addView(deleteRow);
 
-                    prices.addView(tr);
+                    resultsTable.addView(tr);
                 }
-
+                else {
+                    TextView noResults = new TextView(this);
+                    noResults.setText("No results.");
+                    noResults.setTextSize(25);
+                }
             }
+        }
     }
 
-    }
 
-
-
-
-    // Start button clicked
+    // Log out button clicked
     public void logOutButtonClicked(View view) {
-
         Intent intent = new Intent(this, LogInPageActivity.class);
+        String sharedSaveName = "saveUserName";
+        SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
+        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+        preferencesEditor.clear();
+        preferencesEditor.apply();
         ResultModel result = new ResultModel();
         intent.putExtra("Result", result);
         startActivity(intent);
     }
 
+    // Start over button clicked
     public void startOverButtonClicked(View view) {
-        Intent intent = new Intent(this, ClimateActivity.class);
-        ResultModel result = new ResultModel();
-        result.setUserName(user_name);
-        intent.putExtra("Result", result);
+        Intent intent = new Intent(this, MenuActivity.class);
+
         startActivity(intent);
-
     }
-
 
 }

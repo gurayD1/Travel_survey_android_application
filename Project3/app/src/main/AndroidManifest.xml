@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project">
         <activity
-            android:name=".setNewPasswordActivity"
+            android:name=".SetNewPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".SendResetActivity"
@@ -31,7 +31,7 @@
             android:name=".ResultActivity"
             android:exported="false" />
         <activity
-            android:name=".HistoryAndNewTestActivity"
+            android:name=".MenuActivity"
             android:exported="false" />
         <activity
             android:name=".LogInPageActivity"

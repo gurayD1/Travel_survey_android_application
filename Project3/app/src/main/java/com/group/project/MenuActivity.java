@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class HistoryAndNewTestActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history_and_new_test);
+        setContentView(R.layout.activity_menu);
     }
 
     public void startOver(View view) {
@@ -19,7 +19,7 @@ public class HistoryAndNewTestActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ClimateActivity.class);
 
         // Add result
-        ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
+        ResultModel result = new ResultModel();
 
         // Pass result to next activity
         intent.putExtra("Result", result);
@@ -39,7 +39,6 @@ public class HistoryAndNewTestActivity extends AppCompatActivity {
 
         // Pass result to next activity
         intent.putExtra("Result", result);
-
 
         intent.putExtra("seeHistory", true);
 

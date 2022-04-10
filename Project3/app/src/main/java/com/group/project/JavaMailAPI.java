@@ -15,63 +15,61 @@ import javax.mail.internet.MimeMessage;
 
 class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
 
-    //Add those line in dependencies
-    //implementation files('libs/activation.jar')
-    //implementation files('libs/additionnal.jar')
-    //implementation files('libs/mail.jar')
+    // These files are added to dependencies in build.gradle
+    // implementation files('libs/activation.jar')
+    // implementation files('libs/additional.jar')
+    // implementation files('libs/mail.jar')
 
-    //Need INTERNET permission
+    // Needs INTERNET permission
 
     //Variables
-    private Context mContext;
-    private Session mSession;
-
-    private String mEmail;
-    private String mSubject;
-    private String mMessage;
-
-    private ProgressDialog mProgressDialog;
+    private Context mailContext;
+    private Session mailSession;
+    private String mailEmail;
+    private String mailSubject;
+    private String mailMessage;
+    private ProgressDialog mailProgressDialog;
 
     //Constructor
     public JavaMailAPI(Context mContext, String mEmail, String mSubject, String mMessage) {
-        this.mContext = mContext;
-        this.mEmail = mEmail;
-        this.mSubject = mSubject;
-        this.mMessage = mMessage;
+        this.mailContext = mContext;
+        this.mailEmail = mEmail;
+        this.mailSubject = mSubject;
+        this.mailMessage = mMessage;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         //Show progress dialog while sending email
-        mProgressDialog = ProgressDialog.show(mContext,"Sending message", "Please wait...",false,false);
+        mailProgressDialog = ProgressDialog.show(mailContext,"Sending message",
+                "Please wait...",false,false);
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         //Dismiss progress dialog when message successfully send
-        mProgressDialog.dismiss();
+        mailProgressDialog.dismiss();
 
         //Show success toast
-        Toast.makeText(mContext,"Message Sent",Toast.LENGTH_SHORT).show();
+        Toast.makeText(mailContext,"Message Sent",Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected Void doInBackground(Void... params) {
-        //Creating properties
+        // Creating properties
         Properties props = new Properties();
 
-        //Configuring properties for gmail
-        //If you are not using gmail you may need to change the values
+        // Configures gmail properties
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
 
-        //Creating a new session
-        mSession = Session.getDefaultInstance(props,
+        // Creating a new session
+        mailSession = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     //Authenticating the password
                     protected PasswordAuthentication getPasswordAuthentication() {
@@ -81,38 +79,18 @@ class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
 
         try {
             //Creating MimeMessage object
-            MimeMessage mm = new MimeMessage(mSession);
+            MimeMessage mm = new MimeMessage(mailSession);
 
             //Setting sender address
             mm.setFrom(new InternetAddress(Utils.EMAIL));
             //Adding receiver
-            mm.addRecipient(Message.RecipientType.TO, new InternetAddress(mEmail));
+            mm.addRecipient(Message.RecipientType.TO, new InternetAddress(mailEmail));
             //Adding subject
-            mm.setSubject(mSubject);
+            mm.setSubject(mailSubject);
             //Adding message
-            mm.setText(mMessage);
+            mm.setText(mailMessage);
             //Sending email
             Transport.send(mm);
-
-//            BodyPart messageBodyPart = new MimeBodyPart();
-//
-//            messageBodyPart.setText(message);
-//
-//            Multipart multipart = new MimeMultipart();
-//
-//            multipart.addBodyPart(messageBodyPart);
-//
-//            messageBodyPart = new MimeBodyPart();
-//
-//            DataSource source = new FileDataSource(filePath);
-//
-//            messageBodyPart.setDataHandler(new DataHandler(source));
-//
-//            messageBodyPart.setFileName(filePath);
-//
-//            multipart.addBodyPart(messageBodyPart);
-
-//            mm.setContent(multipart);
 
         } catch (MessagingException e) {
             e.printStackTrace();
