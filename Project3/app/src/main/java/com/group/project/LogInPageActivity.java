@@ -16,8 +16,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 public class LogInPageActivity extends AppCompatActivity {
-    private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE  = 1;
-    private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE  = 2;
+    private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
+    private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE = 2;
     EditText loginEmail;
     EditText loginPassword;
 
@@ -49,19 +49,19 @@ public class LogInPageActivity extends AppCompatActivity {
 
     private void checkForAccessFileSystemPermission() {
         if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE ) !=
+                Manifest.permission.READ_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE },
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
 
         }
 
         if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE  ) !=
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE  },
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
 
         }
@@ -85,7 +85,6 @@ public class LogInPageActivity extends AppCompatActivity {
             intent.putExtra("Result", result);
             intent.putExtra("user_name", uEmail);
 
-
             String sharedSaveName = "saveUserName";
             SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
             SharedPreferences.Editor preferencesEditor = mPreferences.edit();
@@ -94,8 +93,7 @@ public class LogInPageActivity extends AppCompatActivity {
 
             // Start the first activity page
             startActivity(intent);
-        }
-        else {
+        } else {
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Username or password is incorrect!",
                     Toast.LENGTH_SHORT);
@@ -105,14 +103,12 @@ public class LogInPageActivity extends AppCompatActivity {
 
     }
 
-    public void forgotClicked(View view){
+    public void forgotClicked(View view) {
 
-        Intent intent = new Intent(this,SendResetActivity.class);
+        Intent intent = new Intent(this, SendResetActivity.class);
         startActivity(intent);
 
     }
-
-
 
     public void signUpClicked(View view) {
         String uEmail = sEmail.getText().toString();
@@ -121,7 +117,6 @@ public class LogInPageActivity extends AppCompatActivity {
         String cPassword = sCPassword.getText().toString();
 
         UsersDB usersDB = UsersDB.getInstance();
-
 
         // Check if username is already registered and so error if that's the case
         if (usersDB.checkUserExists(uEmail)) {
@@ -144,11 +139,11 @@ public class LogInPageActivity extends AppCompatActivity {
             UsersDB allUsers = UsersDB.getInstance();
             allUsers.addUser(user);
 
-         //   Gson gson = new Gson();
+            //   Gson gson = new Gson();
 
-           // String myData = gson.toJson(allUsers);
-          //  Log.d("my data", myData);
-           // saveDataInstance.saveUsersToFile(myData);
+            // String myData = gson.toJson(allUsers);
+            //  Log.d("my data", myData);
+            // saveDataInstance.saveUsersToFile(myData);
 
             saveDataInstance.saveUsersToFile_new(allUsers);
 
@@ -176,7 +171,6 @@ public class LogInPageActivity extends AppCompatActivity {
 
             toast.show();
         }
-
 
     }
 }

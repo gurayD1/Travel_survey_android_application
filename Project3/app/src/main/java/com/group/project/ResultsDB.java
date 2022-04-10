@@ -32,32 +32,26 @@ public class ResultsDB implements Serializable {
         }
     }
 
+    public static Boolean deleteResult(int resultId) {
 
-    public static Boolean deleteResult(int resultId){
+        for (ResultModel rs : ResultsDB.getAllResults()) {
 
-        for( ResultModel rs : ResultsDB.getAllResults()){
-
-            if(rs.getId() == resultId){
+            if (rs.getId() == resultId) {
                 ResultsDB.getAllResults().remove(rs);
                 return true;
             }
-
         }
         return false;
-
     }
 
     public void addResult(ResultModel r) {
         if (allResults == null) {
             allResults = new ArrayList<ResultModel>();
-
         }
-
         allResults.add(r);
     }
 
     public static Integer getID() {
-
         if (ResultsDB.getInstance().allResults == null) {
             return 1;
         } else

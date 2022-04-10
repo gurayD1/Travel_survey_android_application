@@ -13,25 +13,22 @@ import java.util.Random;
 public class SendResetActivity extends AppCompatActivity {
 
     EditText email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_reset_code);
-
         email = findViewById(R.id.textViewEmail);
     }
 
     public void submitClicked(View view) {
-      String userEmail =  email.getText().toString();
+        String userEmail = email.getText().toString();
         sendMail(userEmail);
-
-
     }
 
-    private  void sendMail(String mail){
-      //  String mail = "guray1955@gmail.com";
-
-        if(UsersDB.checkUserExists(mail)) {
+    private void sendMail(String mail) {
+        //String mail = "guray1955@gmail.com";
+        if (UsersDB.checkUserExists(mail)) {
 
             UserModel userModel = UsersDB.sendExistUser(mail);
             String message = getSaltString();
@@ -41,9 +38,8 @@ public class SendResetActivity extends AppCompatActivity {
             JavaMailAPI javaMailAPI = new JavaMailAPI(this, mail, subject, message);
             javaMailAPI.execute();
 
-        }
-        else {
-            Toast toast = Toast.makeText(getApplicationContext(),
+        } else {
+            Toast.makeText(getApplicationContext(),
                     "Email does not exist!",
                     Toast.LENGTH_SHORT);
         }
@@ -51,12 +47,12 @@ public class SendResetActivity extends AppCompatActivity {
     }
 
     protected String getSaltString() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        String saltChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
         while (salt.length() < 5) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
+            int index = (int) (rnd.nextFloat() * saltChars.length());
+            salt.append(saltChars.charAt(index));
         }
         String saltStr = salt.toString();
         return saltStr;
@@ -64,8 +60,7 @@ public class SendResetActivity extends AppCompatActivity {
     }
 
     public void accessCodeClicked(View view) {
-
-        Intent intent = new Intent(this,SendAccessActivity.class);
+        Intent intent = new Intent(this, SendAccessActivity.class);
         startActivity(intent);
     }
 }

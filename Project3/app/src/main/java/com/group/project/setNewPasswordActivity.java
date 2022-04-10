@@ -11,6 +11,7 @@ import android.widget.Toast;
 public class setNewPasswordActivity extends AppCompatActivity {
     EditText uPassword;
     EditText uCPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,33 +22,29 @@ public class setNewPasswordActivity extends AppCompatActivity {
     }
 
 
-    public void submitPassword(View view){
+    public void submitPassword(View view) {
 
-        UserModel userModel = (UserModel)getIntent().getSerializableExtra("userInstance");
+        UserModel userModel = (UserModel) getIntent().getSerializableExtra("userInstance");
 
         String userPassword = uPassword.getText().toString();
 
         String userCPassword = uCPassword.getText().toString();
 
-        if(userPassword.equals(userCPassword)){
+        if (userPassword.equals(userCPassword)) {
 
-            UsersDB.resetUserPassword(userModel,userPassword );
+            UsersDB.resetUserPassword(userModel, userPassword);
 
             saveData saveDataInstance = new saveData();
-            UsersDB usersDB =  UsersDB.getInstance();
+            UsersDB usersDB = UsersDB.getInstance();
             saveDataInstance.saveUsersToFile_new(usersDB);
 
 
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-//            Intent intent = new Intent(this,LogInPageActivity.class);
-//            startActivity(intent);
-
-
-        }else {
+        } else {
             Toast.makeText(this,
-                    " password does not match",
+                    "Password does not match!",
                     Toast.LENGTH_SHORT).show();
         }
 

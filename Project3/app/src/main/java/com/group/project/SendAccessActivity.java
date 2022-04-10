@@ -12,6 +12,7 @@ public class SendAccessActivity extends AppCompatActivity {
 
     EditText userEmail;
     EditText userAccessCode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,26 +29,21 @@ public class SendAccessActivity extends AppCompatActivity {
         userModel.setAccessCode(userAccessCode.getText().toString());
 
         UserModel userModel1 = UsersDB.resetPassword(userModel);
-        if(userModel1 != null){
+        if (userModel1 != null) {
 
-             Toast.makeText(this,
-                    "information is correct",
+            Toast.makeText(this,
+                    "Successfully authorized!",
                     Toast.LENGTH_SHORT).show();
 
-           Intent intent = new Intent(this,setNewPasswordActivity.class);
-           intent.putExtra("userInstance", userModel1);
+            Intent intent = new Intent(this, setNewPasswordActivity.class);
+            intent.putExtra("userInstance", userModel1);
             startActivity(intent);
 
-        }else {
-             Toast.makeText(this,
-                    "information is not correct",
+        } else {
+            Toast.makeText(this,
+                    "Access code does not match!",
                     Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
 
-    public void submitPassword1(View view) {
-    }
 }

@@ -14,16 +14,13 @@ public class UsersDB implements Serializable {
 
     static private File filePath = null;
 
-
-
-
-    public static void setFilePath(File f){
+    public static void setFilePath(File f) {
         filePath = f;
 
     }
 
-    public static File getFilePath(){
-       return filePath;
+    public static File getFilePath() {
+        return filePath;
 
     }
 
@@ -96,11 +93,7 @@ public class UsersDB implements Serializable {
 
             }
         }
-
-
     }
-
-
 
     public static Boolean validateUser(UserModel u) {
         saveData ss = new saveData();
@@ -113,8 +106,6 @@ public class UsersDB implements Serializable {
                 }
             }
         }
-
         return false;
     }
-
 }
