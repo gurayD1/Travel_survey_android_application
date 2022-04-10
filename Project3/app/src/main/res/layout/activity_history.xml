@@ -13,7 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="585dp" />
+
+        app:layout_constraintGuide_percent="0.8"
+        />
 
     <TextView
         android:id="@+id/txtResults"
@@ -65,14 +67,14 @@
                 android:text="Country" />
         </TableRow>
 
-<!--        <HorizontalScrollView-->
-<!--            android:id="@+id/horizontalScrollView"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            app:layout_constraintBottom_toTopOf="@id/gl_h80"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/txtResults">-->
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toTopOf="@id/gl_h80"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtResults">
 
             <ScrollView
                 android:id="@+id/scrollView"
@@ -96,7 +98,7 @@
                 </TableLayout>
 
             </ScrollView>
-<!--        </HorizontalScrollView>-->
+        </HorizontalScrollView>
     </TableLayout>
 
     <LinearLayout

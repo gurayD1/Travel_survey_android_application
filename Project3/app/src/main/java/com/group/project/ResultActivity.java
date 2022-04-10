@@ -91,8 +91,6 @@ public class ResultActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.INTERNET},
                     MY_PERMISSIONS_INTERNET);
         }
-
-
     }
 
     public void moreInfoClicked(View view) {
