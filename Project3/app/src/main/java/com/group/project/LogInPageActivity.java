@@ -41,7 +41,6 @@ public class LogInPageActivity extends AppCompatActivity {
         SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
 
         checkForAccessFileSystemPermission();
-
     }
 
     private void checkForAccessFileSystemPermission() {
