@@ -33,7 +33,7 @@ public class ResultsDB implements Serializable {
     }
 
 
-    public static Boolean seleteResult(int resultId){
+    public static Boolean deleteResult(int resultId){
 
         for( ResultModel rs : ResultsDB.getAllResults()){
 

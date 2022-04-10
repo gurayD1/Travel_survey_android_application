@@ -89,7 +89,7 @@ public class HistoryActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
 
-                            if (ResultsDB.seleteResult(deleteRow.getId())) {
+                            if (ResultsDB.deleteResult(deleteRow.getId())) {
 
                                  saveData saveData = new saveData();
 
