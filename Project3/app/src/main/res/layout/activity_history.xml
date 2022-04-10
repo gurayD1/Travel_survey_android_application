@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.80" />
+        app:layout_constraintGuide_begin="585dp" />
 
     <TextView
         android:id="@+id/txtResults"
@@ -34,15 +34,21 @@
     <TableLayout
         android:id="@+id/tableHeader"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="25dp"
-        android:gravity="center"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtResults">
+        app:layout_constraintTop_toBottomOf="@id/txtResults"
+        app:layout_constraintBottom_toTopOf="@id/gl_h80"
 
-        <TableRow>
+        >
+
+        <TableRow
+
+
+            >
 
             <TextView
                 android:layout_column="0"
@@ -59,21 +65,24 @@
                 android:text="Country" />
         </TableRow>
 
-        <HorizontalScrollView
-            android:id="@+id/horizontalScrollView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toTopOf="@id/gl_h80"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtResults">
+<!--        <HorizontalScrollView-->
+<!--            android:id="@+id/horizontalScrollView"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/gl_h80"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/txtResults">-->
 
             <ScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+
+
+                >
 
                 <TableLayout
                     android:id="@+id/testTable"
@@ -87,7 +96,7 @@
                 </TableLayout>
 
             </ScrollView>
-        </HorizontalScrollView>
+<!--        </HorizontalScrollView>-->
     </TableLayout>
 
     <LinearLayout
