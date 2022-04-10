@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 public class CityActivity extends AppCompatActivity {
 
+    private ArrayList<CityModel> cityList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,7 @@ public class CityActivity extends AppCompatActivity {
         Button[] buttons = new Button[] {button1, button2, button3};
 
         // Filter cities
-        ArrayList<String> cityList = quiz.getFinalCities(result);
+        cityList = quiz.getFinalCities(result);
 
         // Hide buttons depending on how many results there are
         switch (cityList.size()) {
@@ -47,7 +49,7 @@ public class CityActivity extends AppCompatActivity {
 
         // Display the city names in the buttons
         for (int i = 0; i < cityList.size(); i++) {
-            buttons[i].setText(cityList.get(i));
+            buttons[i].setText(cityList.get(i).getName());
         }
     }
 
@@ -56,9 +58,13 @@ public class CityActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ResultActivity.class);
 
         ResultModel result = (ResultModel)getIntent().getSerializableExtra("Result");
-        Button button = (Button)findViewById(R.id.buttonCity1);
+        result.setCityName(cityList.get(0).getName());
+        result.setDescription(cityList.get(0).getDescription());
+        result.setImage(cityList.get(0).getImage());
+        result.setUrl(cityList.get(0).getUrl());
+        result.setLatitude(cityList.get(0).getLatitude());
+        result.setLongitude(cityList.get(0).getLongitude());
 
-        result.setCityName(button.getText().toString());
         intent.putExtra("Result", result);
         // Start the first activity page
         startActivity(intent);
@@ -69,9 +75,13 @@ public class CityActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ResultActivity.class);
 
         ResultModel result = (ResultModel)getIntent().getSerializableExtra("Result");
-        Button button = (Button)findViewById(R.id.buttonCity2);
+        result.setCityName(cityList.get(1).getName());
+        result.setDescription(cityList.get(1).getDescription());
+        result.setImage(cityList.get(1).getImage());
+        result.setUrl(cityList.get(1).getUrl());
+        result.setLatitude(cityList.get(1).getLatitude());
+        result.setLongitude(cityList.get(1).getLongitude());
 
-        result.setCityName(button.getText().toString());
         intent.putExtra("Result", result);
         // Start the first activity page
         startActivity(intent);
@@ -82,9 +92,13 @@ public class CityActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ResultActivity.class);
 
         ResultModel result = (ResultModel)getIntent().getSerializableExtra("Result");
-        Button button = (Button)findViewById(R.id.buttonCity3);
+        result.setCityName(cityList.get(2).getName());
+        result.setDescription(cityList.get(2).getDescription());
+        result.setImage(cityList.get(2).getImage());
+        result.setUrl(cityList.get(2).getUrl());
+        result.setLatitude(cityList.get(2).getLatitude());
+        result.setLongitude(cityList.get(2).getLongitude());
 
-        result.setCityName(button.getText().toString());
         intent.putExtra("Result", result);
         // Start the first activity page
         startActivity(intent);
