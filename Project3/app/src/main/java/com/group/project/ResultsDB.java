@@ -32,6 +32,21 @@ public class ResultsDB implements Serializable {
         }
     }
 
+
+    public static Boolean seleteResult(int resultId){
+
+        for( ResultModel rs : ResultsDB.getAllResults()){
+
+            if(rs.getId() == resultId){
+                ResultsDB.getAllResults().remove(rs);
+                return true;
+            }
+
+        }
+        return false;
+
+    }
+
     public void addResult(ResultModel r) {
         if (allResults == null) {
             allResults = new ArrayList<ResultModel>();
