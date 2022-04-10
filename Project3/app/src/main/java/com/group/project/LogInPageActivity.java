@@ -118,6 +118,13 @@ public class LogInPageActivity extends AppCompatActivity {
 
             toast.show();
         }
+        else if (uEmail.isEmpty() && uName.isEmpty() && password.isEmpty()){
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Please Fill in the boxes",
+                    Toast.LENGTH_SHORT);
+
+            toast.show();
+        }
         // Otherwise check if the passwords match
         else if (password.equals(cPassword)) {
             UserModel user = new UserModel();
