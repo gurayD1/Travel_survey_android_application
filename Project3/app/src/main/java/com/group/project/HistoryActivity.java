@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 public class HistoryActivity extends AppCompatActivity {
 
-
     String user_name = "";
 
     @Override
@@ -21,29 +20,38 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        // Get the result
         ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
 
+        // Check if the history page should be active or not
         boolean seeHistory = getIntent().getBooleanExtra("seeHistory", false);
 
+        // Retrieve username from shared preferences
         String sharedSaveName = "saveUserName";
         SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
         user_name = mPreferences.getString("user_name", "");
 
+        // Retrieve results from database
         ResultsDB resultsDB = ResultsDB.getInstance();
 
+        // Add the result to history if it's not empty
         if (!seeHistory) {
             if(result != null){
             resultsDB.addResult(result);}
         }
 
+        // If result database isn't empty, proceed
         if (ResultsDB.getAllResults() != null) {
 
+            // Create a table of results
             TableLayout resultsTable = (TableLayout) findViewById(R.id.testTable);
-
             resultsTable.setStretchAllColumns(true);
             resultsTable.bringToFront();
+
+            // Go through all the results
             for (ResultModel result1 : ResultsDB.getAllResults()) {
 
+                // If the username matches the username in results, add city and country to table
                 if (user_name.equals(result1.getUserName())) {
                     TableRow tr = new TableRow(this);
 
@@ -56,10 +64,12 @@ public class HistoryActivity extends AppCompatActivity {
                     countryName.setText(String.valueOf(result1.getCountryName()));
                     countryName.setTextSize(15);
 
+                    // Create a delete button
                     Button deleteRow = new Button(this);
                     deleteRow.setText("Delete");
                     deleteRow.setId(result1.getId());
 
+                    // Delete row when button is clicked
                     deleteRow.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

@@ -30,6 +30,7 @@ import java.util.Scanner;
 
 public class SaveData extends AppCompatActivity {
 
+    // Load users from database
     public UsersDB loadUsersFromFile() {
         ObjectInput in;
         UsersDB instance = null;
@@ -44,6 +45,7 @@ public class SaveData extends AppCompatActivity {
         return instance;
     }
 
+    // Save users to database
     public void saveUsersToFile(UsersDB instance) {
         ObjectOutput out;
         try {
@@ -56,6 +58,7 @@ public class SaveData extends AppCompatActivity {
         }
     }
 
+    // Save the users to a file
     public void saveResultsToFile(ResultsDB instance) {
         ObjectOutput out;
         try {
@@ -68,6 +71,7 @@ public class SaveData extends AppCompatActivity {
         }
     }
 
+    // Load results from user database file
     public ResultsDB loadResultsFromFile() {
         ObjectInput in;
         ResultsDB instance = null;

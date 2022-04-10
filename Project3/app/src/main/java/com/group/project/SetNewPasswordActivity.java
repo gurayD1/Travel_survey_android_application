@@ -22,6 +22,7 @@ public class SetNewPasswordActivity extends AppCompatActivity {
     }
 
 
+    // Sets a new password in the database
     public void submitPassword(View view) {
 
         UserModel userModel = (UserModel) getIntent().getSerializableExtra("userInstance");
@@ -37,7 +38,6 @@ public class SetNewPasswordActivity extends AppCompatActivity {
             SaveData saveDataInstance = new SaveData();
             UsersDB usersDB = UsersDB.getInstance();
             saveDataInstance.saveUsersToFile(usersDB);
-
 
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

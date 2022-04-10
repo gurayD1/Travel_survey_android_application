@@ -17,16 +17,16 @@ public class MainActivity extends AppCompatActivity {
         createFilePath();
     }
 
+    // Creates path for where to store users
     public void createFilePath() {
-
         UsersDB.setFilePath(this.getFilesDir());
-
         Log.d("file name", this.getFilesDir().toString());
     }
 
     // Start button clicked
     public void startButtonClicked(View view) {
 
+        // Load users and results database
         Intent intent;
         SaveData saveDataInstance = new SaveData();
         UsersDB usersDB = UsersDB.getInstance();
@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
         String sharedSaveName = "saveUserName";
         SharedPreferences mPreferences = getSharedPreferences(sharedSaveName, MODE_PRIVATE);
 
+        // Show login page if user is not logged in, otherwise go to main menu page
         if (mPreferences.getString("user_name", "").length() == 0) {
             intent = new Intent(this, LogInPageActivity.class);
-        }
-        else {
+        } else {
             intent = new Intent(this, MenuActivity.class);
         }
         intent.putExtra("Result", result);

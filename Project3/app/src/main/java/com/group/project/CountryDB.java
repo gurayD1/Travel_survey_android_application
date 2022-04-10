@@ -7,6 +7,7 @@ public class CountryDB implements Serializable {
 
     private ArrayList<CountryModel> countryList = new ArrayList<>();
 
+    // Create a database of countries and their climates
     public CountryDB() {
         AddCountry(new CountryModel("Dominican Republic", "Hot"));
         AddCountry(new CountryModel("Jamaica", "Hot"));
@@ -25,6 +26,7 @@ public class CountryDB implements Serializable {
         AddCountry(new CountryModel("China", "Cold"));
     }
 
+    // Add a country to the database
     public boolean AddCountry(CountryModel country) {
         if (countryList.contains(country))
             return false;
@@ -34,10 +36,12 @@ public class CountryDB implements Serializable {
         }
     }
 
+    // Retrieve all countries from the database
     public CountryModel[] GetAllCountries() {
         return countryList.toArray(new CountryModel[countryList.size()]);
     }
 
+    // Remove a country from the database
     public boolean RemoveCountry(CountryModel country) {
         if (countryList.contains(country)) {
             countryList.remove(country);

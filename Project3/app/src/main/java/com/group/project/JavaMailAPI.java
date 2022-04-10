@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
+
 import java.util.Properties;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -13,16 +15,14 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
+class JavaMailAPI extends AsyncTask<Void, Void, Void> {
 
     // These files are added to dependencies in build.gradle
     // implementation files('libs/activation.jar')
     // implementation files('libs/additional.jar')
     // implementation files('libs/mail.jar')
 
-    // Needs INTERNET permission
-
-    //Variables
+    // Variables
     private Context mailContext;
     private Session mailSession;
     private String mailEmail;
@@ -30,7 +30,7 @@ class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
     private String mailMessage;
     private ProgressDialog mailProgressDialog;
 
-    //Constructor
+    // Constructor
     public JavaMailAPI(Context mContext, String mEmail, String mSubject, String mMessage) {
         this.mailContext = mContext;
         this.mailEmail = mEmail;
@@ -41,19 +41,19 @@ class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        //Show progress dialog while sending email
-        mailProgressDialog = ProgressDialog.show(mailContext,"Sending message",
-                "Please wait...",false,false);
+        // While it's sending email, it shows message of the progress
+        mailProgressDialog = ProgressDialog.show(mailContext, "Sending message",
+                "Please wait...", false, false);
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        //Dismiss progress dialog when message successfully send
+        // Dismiss progress dialog when message is successfully sent
         mailProgressDialog.dismiss();
 
-        //Show success toast
-        Toast.makeText(mailContext,"Message Sent",Toast.LENGTH_SHORT).show();
+        // Show success toast
+        Toast.makeText(mailContext, "Message Sent", Toast.LENGTH_SHORT).show();
     }
 
     @Override

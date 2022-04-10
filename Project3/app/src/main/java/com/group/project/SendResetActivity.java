@@ -21,11 +21,13 @@ public class SendResetActivity extends AppCompatActivity {
         email = findViewById(R.id.textViewEmail);
     }
 
+    // When submit button is clicked, sends email to user
     public void submitClicked(View view) {
         String userEmail = email.getText().toString();
         sendMail(userEmail);
     }
 
+    // Sends email to reset password using Java mail API
     private void sendMail(String mail) {
         //String mail = "guray1955@gmail.com";
         if (UsersDB.checkUserExists(mail)) {
@@ -46,6 +48,7 @@ public class SendResetActivity extends AppCompatActivity {
 
     }
 
+    // Generates random characters for an access code to reset password
     protected String getSaltString() {
         String saltChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
@@ -59,6 +62,7 @@ public class SendResetActivity extends AppCompatActivity {
 
     }
 
+    // Go to submit access code page after clicked
     public void accessCodeClicked(View view) {
         Intent intent = new Intent(this, SendAccessActivity.class);
         startActivity(intent);

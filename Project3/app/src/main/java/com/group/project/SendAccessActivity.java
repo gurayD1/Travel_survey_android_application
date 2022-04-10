@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SendAccessActivity extends AppCompatActivity {
 
+    // Variables
     EditText userEmail;
     EditText userAccessCode;
 
@@ -21,6 +22,7 @@ public class SendAccessActivity extends AppCompatActivity {
         userAccessCode = findViewById(R.id.textViewAccessCode);
     }
 
+    // If submit access code button is clicked, check if authorized
     public void submitAccessClicked(View view) {
 
         UserModel userModel = new UserModel();
@@ -29,6 +31,8 @@ public class SendAccessActivity extends AppCompatActivity {
         userModel.setAccessCode(userAccessCode.getText().toString());
 
         UserModel userModel1 = UsersDB.resetPassword(userModel);
+
+        // Shows message if authorized or not
         if (userModel1 != null) {
 
             Toast.makeText(this,

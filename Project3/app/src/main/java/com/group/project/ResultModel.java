@@ -32,10 +32,10 @@ public class ResultModel implements Serializable {
     @SerializedName("longitude")
     private String longitude;
 
+    // Constructor
     public ResultModel() {
         id = ResultsDB.getInstance().getID();
     }
-
 
     // Getters and setters
     public String getClimate() {

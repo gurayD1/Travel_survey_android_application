@@ -23,8 +23,6 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-
-
         // Get result
         ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
 
@@ -83,6 +81,7 @@ public class ResultActivity extends AppCompatActivity {
 
     }
 
+    // Checks if user has internet enabled
     private void checkForInternetPermission() {
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.INTERNET) !=
@@ -93,6 +92,7 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
 
+    // Opens a city's url for more info
     public void moreInfoClicked(View view) {
         // Get result
         ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
@@ -100,11 +100,9 @@ public class ResultActivity extends AppCompatActivity {
         String url = result.getUrl();
         Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivityForResult(urlIntent, URL_REQUEST);
-//        if (urlIntent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(urlIntent, URL_REQUEST);
-//        }
     }
 
+    // Opens a city's location in Google Maps
     public void openMapClicked(View view) {
         ResultModel result = (ResultModel) getIntent().getSerializableExtra("Result");
         String parameter = result.getLatitude() + ", " + result.getLongitude();
@@ -112,9 +110,5 @@ public class ResultActivity extends AppCompatActivity {
         Intent mapIntent = new Intent(Intent.ACTION_VIEW);
         mapIntent.setData(mapURI);
         startActivityForResult(mapIntent, MAP_REQUEST);
-//        if (mapIntent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(mapIntent, MAP_REQUEST);
-//        }
-
     }
 }

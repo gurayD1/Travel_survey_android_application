@@ -7,14 +7,17 @@ import java.util.Set;
 
 public class Quiz {
 
+    // Filters countries using climate
     public ArrayList<String> filterCountries(ResultModel result) {
         CountryDB countryDB = new CountryDB();
         String userClimate = result.getClimate();
         ArrayList<String> countryList = new ArrayList<String>();
 
+        // Goes through all countries in the database
         for (CountryModel country : countryDB.GetAllCountries()) {
             String name = country.getCountry();
             String climate = country.getClimate();
+            // If the user's climate choice matches the country's climate, add country to list
             if (userClimate.equals(climate)) {
                 countryList.add(name);
             }
@@ -23,6 +26,7 @@ public class Quiz {
         return countryList;
     }
 
+    // Filter cities using climate
     public ArrayList<String> filterClimate(ResultModel result) {
         CityDB cityDB = new CityDB();
         ArrayList<String> cityList = new ArrayList<String>();
@@ -37,13 +41,17 @@ public class Quiz {
         return cityList;
     }
 
+    // Calculate scores of quiz to determine results
     public ArrayList<ScoreModel> calculateScores(ResultModel result) {
         CityDB cityDB = new CityDB();
+
+        // Get user's input
         String userBudget = result.getBudget();
         String userPhobia = result.getPhobia();
         String userLandscape = result.getLandscape();
         ArrayList<ScoreModel> scoreList = new ArrayList<ScoreModel>();
 
+        // Go through all cities
         for (CityModel city : cityDB.GetAllCities()) {
             boolean addCity = false;
             int score = 0;
@@ -65,11 +73,11 @@ public class Quiz {
                 score++;
             }
 
+            // If person has no phobias, add cities with any phobia to list
             if (city.getPhobia().equals("None")) {
                 addCity = true;
                 score++;
-            }
-            else if (!city.getPhobia().equals(userPhobia)) {
+            } else if (!city.getPhobia().equals(userPhobia)) {
                 addCity = true;
                 score++;
             }
@@ -93,10 +101,12 @@ public class Quiz {
         ArrayList<ScoreModel> scoreList = calculateScores(result);
         Collections.sort(scoreList);
 
+        // Filter cities by climates
         ArrayList<String> cityListByClimate = filterClimate(result);
         ArrayList<ScoreModel> filteredScoreList = new ArrayList<ScoreModel>();
         ArrayList<String> cityList = new ArrayList<String>();
 
+        // Add the filtered cities together to a new list
         for (ScoreModel scoreModel : scoreList) {
             if (cityListByClimate.contains(scoreModel.getCity().getName())) {
                 ScoreModel newModel = new ScoreModel(scoreModel.getCity(), scoreModel.getScore());
@@ -104,6 +114,7 @@ public class Quiz {
             }
         }
 
+        // Add the cities which have a score greater than 1
         for (ScoreModel scoreModel : filteredScoreList) {
             if (scoreModel.getScore() > 1) {
                 cityList.add(scoreModel.getCity().getName());
@@ -113,6 +124,7 @@ public class Quiz {
         return cityList;
     }
 
+    // Retrieves country list from the filtered city options
     public ArrayList<String> getCountriesFromCities(ResultModel result) {
         // Create city DB
         CityDB cityDB = new CityDB();
@@ -134,6 +146,7 @@ public class Quiz {
         return countryList;
     }
 
+    // Returns an array list of cities for the results to use
     public ArrayList<CityModel> getFinalCities(ResultModel result) {
         // Create city DB
         CityDB cityDB = new CityDB();
